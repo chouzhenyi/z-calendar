@@ -1,0 +1,167 @@
+.calendar-timer{
+  display: flex;
+  width: 688px;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px #ABABAB;
+}
+.calendar-timer * {
+  box-sizing: border-box;
+}
+/* 日历主体部分 */
+.calendar{
+  width: 448px;
+  cursor: pointer;
+  padding: 4px 18px 20px 18px;
+  font-size: 12px;
+  border-top: 1px solid #E5E5E5;
+}
+.calendar .calendar-nav{
+  height: 24px;
+  line-height: 24px;
+  margin: 22px 0;
+  display: flex;
+  width: 100%;
+}
+.calendar .calendar-nav .title{
+  flex: 1;
+  color: #2C3135;
+  font-size: 16px;
+}
+.calendar .calendar-nav .prev,.calendar .calendar-nav .next{
+  width: 50px;
+  color: #BAC2C7;
+}
+.calendar .calendar-nav .prev img,.calendar .calendar-nav .next img{
+  width: 20px;
+}
+.calendar .calendar-nav .next img{
+  transform: rotate(180deg);
+}
+.calendar .calendar-day-title{
+  width: 100%;
+  display: flex;
+  color: #BAC2C7;
+}
+.calendar .calendar-day-title div{
+  flex: 1;
+  margin: 0 1px;
+}
+.calendar .calendar-day-wrapper{
+  font-weight: 400;
+  line-height: 24px;
+  color: #333;
+}
+.calendar .calendar-day-wrapper .day-item-wrapper{
+  display: flex;
+}
+.calendar .calendar-day-wrapper .day-item-wrapper .day-item{
+  flex: 1;
+  cursor: pointer;
+  border-radius: 3px;
+  margin: 8px 1px 0 1px;
+  border: #fff solid 1px;
+}
+.calendar .calendar-day-wrapper .day-item-wrapper .day-item:hover{
+  background-color: rgba(99, 158, 244, .3);
+  box-shadow: 0 2px 6px #ABABAB;
+  border: rgba(99, 158, 244, .3) solid 1px;
+}
+/* 点击 */
+.calendar .calendar-day-wrapper .day-item-wrapper .day-item:active{
+  background-color: rgba(99, 158, 244, .6);
+  border: rgba(99, 158, 244, .6) solid 1px;
+  box-shadow: 0 2px 6px #ABABAB;
+}
+.calendar .calendar-day-wrapper .day-item-wrapper .day-item.cur{
+  background-color: #6397f4;
+  border: rgba(99, 158, 244, 1) solid 1px;
+  color: #fff;
+  box-shadow: 0 2px 6px #ABABAB;
+}
+/* 被选中的天 */
+.calendar .calendar-day-wrapper .day-item-wrapper .day-item.active{
+  box-shadow: 0 2px 6px #ABABAB;
+  background-color: rgba(99, 158, 244, .2);
+  border: #6397f4 solid 1px;
+  color: #333;
+}
+.calendar .calendar-day-wrapper .day-item-wrapper .day-item.other-month{
+  color: #9b9b9b;
+}
+/* 早于今天的日期 */
+.calendar .calendar-day-wrapper .day-item-wrapper .day-item.day-earlier{
+  background-color: #EDF2F5 !important;
+  border: 1px solid #EDF2F5 !important;
+  cursor: not-allowed;
+}
+.calendar .calendar-day-wrapper .day-item-wrapper .day-item.day-earlier:hover{
+  box-shadow: none;
+}
+/* 侧边 时间选择 */
+.time-wrapper{
+  flex: 1;
+  border-left: 1px solid #E5E5E5;
+  border-top: 1px solid #E5E5E5;
+}
+.time-wrapper .time-title{
+  height: 50px;
+  color: #2C3135;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: left;
+  padding: 20px 0 10px 20px;
+}
+.time-wrapper .time-list-wrapper{
+  display: flex;
+  height: 230px;
+  padding: 0 20px;
+  cursor: pointer;
+}
+.time-wrapper .time-list-wrapper .time-item{
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+.time-wrapper .time-list-wrapper .time-item .time-item-icon{
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+  text-align: center;
+}
+.time-wrapper .time-list-wrapper .time-item .time-item-icon:hover{
+  background-color: rgba(99, 158, 244, .1);
+}
+.time-wrapper .time-list-wrapper .time-item .time-item-icon:last-child{
+  position: absolute;
+  top: 200px;
+}
+.time-wrapper .time-list-wrapper .time-item .time-item-icon:last-child img{
+  transform: rotate(270deg);
+}
+.time-wrapper .time-list-wrapper .time-item .time-item-icon img{
+  width: 16px;
+  transform: rotate(90deg);
+}
+.time-wrapper .time-list-wrapper .time-item .inner-wrapper{
+  width: 120px;
+  height: 170px;
+  overflow: auto;
+  position: absolute;
+  top: 30px;
+  right: -20px;
+  padding-bottom: 142px;
+}
+.time-wrapper .time-list-wrapper .time-item .inner-wrapper .frage{
+  height: 24px;
+  line-height: 24px;
+  margin: 4px;
+}
+.time-wrapper .time-list-wrapper .time-item .inner-wrapper .frage:hover{
+  background-color: rgba(99, 158, 244, .2);
+}
+.time-wrapper .time-list-wrapper .time-item .inner-wrapper .frage.active{
+  background-color: rgba(99, 158, 244, 1);
+  box-shadow: 0 2px 6px #ABABAB;
+  color: #fff;
+}
