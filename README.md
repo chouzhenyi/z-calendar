@@ -1,29 +1,17 @@
 # z-calendar
 
-## Project setup
+## 一个PC的日历插件 基于vue2.x
+```
+通过vue-cli@3.0 构建的项目；日历插件核心部分是calendar.js ，主要逻辑都在这里；
+用到的道友可以根据自己的需要自行扩展和改写
+```
+
+### 启动方式
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
-
-### Compiles and minifies for production
 ```
-npm run build
+### 第一次写开源插件，欢迎多提宝贵意见
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
