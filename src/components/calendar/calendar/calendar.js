@@ -13,74 +13,74 @@ class Calendar{
         this.thisMonth = false
         this.Option = Object.assign(
             {
-                lang: "zh_cn",    // 默认为 "zh_cn"   当前语言  
+                lang: 'zh_cn',    // 默认为 'zh_cn'   当前语言  
                 showTime: true,   // 默认为 true      是否展示时间选择 
                 accurate: 5,      // 默认每5分钟一档   档可以选 5、10、20、30 ；其他档不管用；当前参数选择，必须在 showTime 为true 的前提下
                 showBefore: false // 默认为false      是否允许可以获取之前的时间
             },
             option || {}
         )
-        this.lang = this.Option.lang || "zh_cn"
+        this.lang = this.Option.lang || 'zh_cn'
         this.MonthList = [
             {
-                "zh_cn": "一月",
-                "enFull": "January",
-                "enshort": "Jan."
+                'zh_cn': '一月',
+                'enFull': 'January',
+                'enshort': 'Jan.'
             },
             {
-                "zh_cn": "二月",
-                "enFull": "February",
-                "enshort": "Feb."
+                'zh_cn': '二月',
+                'enFull': 'February',
+                'enshort': 'Feb.'
             },
             {
-                "zh_cn": "三月",
-                "enFull": "March",
-                "enshort": "Mar."
+                'zh_cn': '三月',
+                'enFull': 'March',
+                'enshort': 'Mar.'
             },
             {
-                "zh_cn": "四月",
-                "enFull": "April",
-                "enshort": "Apr."
+                'zh_cn': '四月',
+                'enFull': 'April',
+                'enshort': 'Apr.'
             },
             {
-                "zh_cn": "五月",
-                "enFull": "May",
-                "enshort": "May"
+                'zh_cn': '五月',
+                'enFull': 'May',
+                'enshort': 'May'
             },
             {
-                "zh_cn": "六月",
-                "enFull": "June",
-                "enshort": "Jun."
+                'zh_cn': '六月',
+                'enFull': 'June',
+                'enshort': 'Jun.'
             },
             {
-                "zh_cn": "七月",
-                "enFull": "July",
-                "enshort": "Jul."
+                'zh_cn': '七月',
+                'enFull': 'July',
+                'enshort': 'Jul.'
             },
             {
-                "zh_cn": "八月",
-                "enFull": "August",
-                "enshort": "Aug."
+                'zh_cn': '八月',
+                'enFull': 'August',
+                'enshort': 'Aug.'
             },
             {
-                "zh_cn": "九月",
-                "enFull": "September",
-                "enshort": "Sept."
+                'zh_cn': '九月',
+                'enFull': 'September',
+                'enshort': 'Sept.'
             },
             {
-                "zh_cn": "十月",
-                "enFull": "October",
-                "enshort": "Oct"
+                'zh_cn': '十月',
+                'enFull': 'October',
+                'enshort': 'Oct'
             },
             {
-                "zh_cn": "十一月",
-                "enFull": "November",
-                "enshort": "Nov."
+                'zh_cn': '十一月',
+                'enFull': 'November',
+                'enshort': 'Nov.'
             },
             {
-                "zh_cn": "十二月",
-                "enFull": "December",
-                "enshort": "Dec."
+                'zh_cn': '十二月',
+                'enFull': 'December',
+                'enshort': 'Dec.'
             }
         ]
     }
@@ -119,8 +119,8 @@ class Calendar{
     }
     // 获取周日 —— 周一 时间
     getDay() {
-        let arr = ["周日", "周一", "周二" ,"周三" ,"周四" ,"周五" ,"周六"]
-        if (this.lang === "en") {
+        let arr = ['周日', '周一', '周二' ,'周三' ,'周四' ,'周五' ,'周六']
+        if (this.lang === 'en') {
             arr = ['Sun.', 'Mon.', 'Tue.', 'Wed.','Thur.', 'Fri.', 'Sat.']
         }
         return arr
@@ -237,8 +237,8 @@ class Calendar{
     }
     // 获取当前展示的年月
     getCurrentShowYearMonth() {
-        let str = ""
-        if (this.lang === "en") {
+        let str = ''
+        if (this.lang === 'en') {
            str = this.MonthList[this.month - 1]['enFull'] + ' ' + this.year 
         }
         str = this.MonthList[this.month - 1]['zh_cn'] + ' ' + this.year
@@ -251,13 +251,13 @@ class Calendar{
     }
     // 返回固定格式的时间
     getSerializedTime(year, month, day, hour, minute) {
-        let timeStr = ""
-        if (this.lang === "en") {
+        let timeStr = ''
+        if (this.lang === 'en') {
             timeStr =  this.MonthList[month - 1]['enFull'] + ' ' + this.zeroPadding(year) + this.zeroPadding(day)
          } else {
-            timeStr = year + "年" + this.zeroPadding(month) + '月' + this.zeroPadding(day) + "日"
+            timeStr = year + '年' + this.zeroPadding(month) + '月' + this.zeroPadding(day) + '日'
          }
-         return timeStr += this.zeroPadding(hour) + ":" + this.zeroPadding(minute)
+         return timeStr += this.zeroPadding(hour) + ':' + this.zeroPadding(minute)
     }
     // 获取完整日历相关数据
     getCalendarData(){
@@ -295,7 +295,7 @@ class Calendar{
         while( i < 24){
             list.push({
                 value: i,
-                type: "hour"
+                type: 'hour'
             })
             i++
         }
@@ -308,11 +308,11 @@ class Calendar{
         while(i < 60) {
             list.push({
                 value: i,
-                type: "minute"
+                type: 'minute'
             })
             i+= step
         }
-        return list
+    return list
     }
 }
 export default Calendar
