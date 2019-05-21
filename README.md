@@ -15,5 +15,7 @@ npm run serve
 
 没有什么参数是b必须的，但可以根据需要配置中英文、是否展示时间控件（分钟数的间隔）、是否展示当天之前的时间等
 
+demo https://chouzhenyi.github.io/z-calendar/
+
 ### 第一次写开源插件，欢迎多提宝贵意见
 ```
