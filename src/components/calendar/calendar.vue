@@ -3,12 +3,14 @@
     <div class="calendar-timer">
         <div class="calendar">
             <div class="calendar-nav">
-                <div class="prev" @click="monthChange(0)">
-                  <img src="./calendar/images/arrow-all.png"/>
+                <div class="prev font24" @click="monthChange(0)">
+                  <!-- <i class="iconfont iconicon1" /> -->
+                  &lt;
                 </div>
                 <div class="title">{{calendarNavTitle}}</div>
-                <div class="next" @click="monthChange(1)">
-                  <img src="./calendar/images/arrow-all.png"/>
+                <div class="next font24" @click="monthChange(1)">
+                  <!-- <i class="iconfont iconicon1" /> -->
+                  &gt;
                 </div>
             </div>
             <div class="calendar-day-title">
@@ -31,24 +33,28 @@
             <div class="time-list-wrapper">
                 <div class="time-item">
                     <div class="time-item-icon" @click="timeArrowScroll(0)">
-                        <img src="./calendar/images/arrow-all.png"/>
+                        <!-- <i class="iconfont iconicon1" /> -->
+                        <span>&lt;</span>
                     </div>
                     <div class="inner-wrapper" ref="hourEl">
                         <div class="frage" v-for="(item, index) in hours" @click="hourClick(index)" :class="{'active': item.value === selectTimeDate.hour}" :key="index">{{item.value}}</div>
                     </div>
                     <div class="time-item-icon" @click="timeArrowScroll(1)">
-                        <img src="./calendar/images/arrow-all.png"/>
+                        <!-- <i class="iconfont iconicon1" /> -->
+                        <span>&lt;</span>
                     </div>
                 </div>
                 <div class="time-item">
                     <div class="time-item-icon" domtype="minute1" @click="timeArrowScroll(2)">
-                        <img src="./calendar/images/arrow-all.png"/>
+                        <!-- <i class="iconfont iconicon1" /> -->
+                        <span>&lt;</span>
                     </div>
                     <div class="inner-wrapper" ref="minuteEl">
                       <div class="frage" v-for="(item, index) in minutes" @click="minuteClick(index)" :class="{'active': item.value === selectTimeDate.minute}"  :key="index">{{item.value}}</div>
                     </div>
                     <div class="time-item-icon" @click="timeArrowScroll(3)">
-                        <img src="./calendar/images/arrow-all.png"/>
+                        <!-- <i class="iconfont iconicon1" /> -->
+                        <span>&lt;</span>
                     </div>
                 </div>
             </div>
@@ -69,11 +75,11 @@
       return {
         // 日历需要配置的必要参数
         option: {
-                  lang: "en",    // 默认为 "zh_cn"   当前语言  
-                  showTime: true,   // 默认为 true      是否展示时间选择 
-                  accurate: 5,      // 默认每5分钟一档   档可以选 5、10、20、30 ；其他档不管用；当前参数选择，必须在 showTime 为true 的前提下
-                  showBefore: false // 默认为false      是否允许可以获取之前的时间
-                },
+          lang: "en",    // 默认为 "zh_cn"   当前语言  
+          showTime: true,   // 默认为 true      是否展示时间选择 
+          accurate: 5,      // 默认每5分钟一档   档可以选 5、10、20、30 ；其他档不管用；当前参数选择，必须在 showTime 为true 的前提下
+          showBefore: false // 默认为false      是否允许可以获取之前的时间
+        },
         calendar: null, // 实例化日历类
         calendarNavTitle: "", // 顶部标题时间
         arrTitleDay: [], // 顶部周列表
