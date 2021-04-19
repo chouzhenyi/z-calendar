@@ -1,5 +1,5 @@
-class Calendar{
-    constructor(option){
+class Calendar {
+    constructor(option) {
         let date = new Date()
         let dateObj = option.initTime
         if (dateObj instanceof Date) {
@@ -86,22 +86,22 @@ class Calendar{
     }
     // 判断闰年
     runNian(_year) {
-        if(_year%400 === 0 || (_year%4 === 0 && _year%100 !== 0) ) {
+        if (_year % 400 === 0 || (_year % 4 === 0 && _year % 100 !== 0)) {
             return true
         }
         return false
     }
     // 本月第一天是周几
-    getFirstDay(_year,_month) {
+    getFirstDay(_year, _month) {
         return new Date(_year, _month - 1, 1).getDay()
     }
     // 获取月份天数
-    getMonthDay( _month , _year) {
+    getMonthDay(_month, _year) {
         let monthDay = 30
-        switch(_month) {
+        switch (_month) {
             case 1: monthDay = 31; break;
             case 2:
-                if(this.runNian(_year)) { monthDay = 29; }
+                if (this.runNian(_year)) { monthDay = 29; }
                 else { monthDay = 28; }
                 break;
             case 3: monthDay = 31; break;
@@ -119,14 +119,14 @@ class Calendar{
     }
     // 获取周日 —— 周一 时间
     getDay() {
-        let arr = ['周日', '周一', '周二' ,'周三' ,'周四' ,'周五' ,'周六']
+        let arr = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
         if (this.lang === 'en') {
-            arr = ['Sun.', 'Mon.', 'Tue.', 'Wed.','Thur.', 'Fri.', 'Sat.']
+            arr = ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thur.', 'Fri.', 'Sat.']
         }
         return arr
     }
     // 当月日历列表
-    getCalendarList(_year,_month) {
+    getCalendarList(_year, _month) {
         var monthDay = this.getMonthDay(_month, _year)
         let i = 0
         let todayObj = new Date();
@@ -155,21 +155,21 @@ class Calendar{
                 month: prevMonth,
                 day,
                 isEarlierThanToday,
-                isToday, 
+                isToday,
                 currentMonth,
                 status: 0
             })
         }
         // 当月遍历加入数组
-        for (i=1; i <= monthDay; i++) {
+        for (i = 1; i <= monthDay; i++) {
             //当日的日期
-            if(_year === todayObj.getFullYear() && _month === todayObj.getMonth()+1 && i === todayObj.getDate()) {
+            if (_year === todayObj.getFullYear() && _month === todayObj.getMonth() + 1 && i === todayObj.getDate()) {
                 isToday = true
             }
             //其他普通的日期
-            else { 
+            else {
                 isToday = false
-             }
+            }
             // 当月
             currentMonth = true
             day = i
@@ -182,7 +182,7 @@ class Calendar{
                 month: _month,
                 day: i,
                 isEarlierThanToday,
-                isToday, 
+                isToday,
                 currentMonth,
                 active: isToday,
                 status: 1
@@ -206,7 +206,7 @@ class Calendar{
                 month: nextMonth,
                 day: i,
                 isEarlierThanToday,
-                isToday, 
+                isToday,
                 currentMonth,
                 status: 2
             })
@@ -214,8 +214,8 @@ class Calendar{
         return calendarArr
     }
     // 每7个为一组分割当月日期列表的数据
-    getCalendar7List(_year,_month) {
-        let list = this.getCalendarList(_year ,_month)
+    getCalendar7List(_year, _month) {
+        let list = this.getCalendarList(_year, _month)
         let temp = []
         let arrLen = list.length
         // 用list 里是否有今天来判断 当前列表是不是本月
@@ -223,13 +223,13 @@ class Calendar{
             return e.isToday
         }).length
         // 遍历本页日期列表；每组7个的而为数组数组
-        for (var i=0;i < arrLen;i++) {
+        for (var i = 0; i < arrLen; i++) {
             let len = temp.length
-            if(!(i%7)) {
+            if (!(i % 7)) {
                 temp[len] = [list[i]]
             } else {
-                if (temp[len -1] instanceof Array) {
-                    temp[len -1].push(list[i])
+                if (temp[len - 1] instanceof Array) {
+                    temp[len - 1].push(list[i])
                 }
             }
         }
@@ -239,7 +239,7 @@ class Calendar{
     getCurrentShowYearMonth() {
         let str = ''
         if (this.lang === 'en') {
-           str = this.MonthList[this.month - 1]['enFull'] + ' ' + this.year 
+            str = this.MonthList[this.month - 1]['enFull'] + ' ' + this.year
         }
         str = this.MonthList[this.month - 1]['zh_cn'] + ' ' + this.year
         console.log(str)
@@ -253,14 +253,14 @@ class Calendar{
     getSerializedTime(year, month, day, hour, minute) {
         let timeStr = ''
         if (this.lang === 'en') {
-            timeStr =  this.MonthList[month - 1]['enFull'] + ' ' + this.zeroPadding(year) + this.zeroPadding(day)
-         } else {
+            timeStr = this.MonthList[month - 1]['enFull'] + ' ' + this.zeroPadding(year) + this.zeroPadding(day)
+        } else {
             timeStr = year + '年' + this.zeroPadding(month) + '月' + this.zeroPadding(day) + '日'
-         }
-         return timeStr += this.zeroPadding(hour) + ':' + this.zeroPadding(minute)
+        }
+        return timeStr += this.zeroPadding(hour) + ':' + this.zeroPadding(minute)
     }
     // 获取完整日历相关数据
-    getCalendarData(){
+    getCalendarData() {
         return {
             list: this.getCalendarList(this.year, this.month),
             calendar7List: this.getCalendar7List(this.year, this.month),
@@ -292,7 +292,7 @@ class Calendar{
     getHours() {
         let list = []
         let i = 0
-        while( i < 24){
+        while (i < 24) {
             list.push({
                 value: i,
                 type: 'hour'
@@ -305,14 +305,14 @@ class Calendar{
         let step = this.Option.accurate
         let list = []
         let i = 0
-        while(i < 60) {
+        while (i < 60) {
             list.push({
                 value: i,
                 type: 'minute'
             })
-            i+= step
+            i += step
         }
-    return list
+        return list
     }
 }
 export default Calendar
