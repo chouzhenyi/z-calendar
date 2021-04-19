@@ -6,25 +6,26 @@
 
 <script>
 
-import calendar from './calendar/calendar.vue'
+import calendar from './calendar/calendar.vue';
+
 export default {
   name: 'home',
   props: {
   },
   components: {
-    calendar
+    calendar,
   },
   computed: {
     calendarOption() {
       return {
-        lang: "zh_cn",    // 默认为 "zh_cn"   当前语言  
-        showTime: true,   // 默认为 true      是否展示时间选择 
-        accurate: 5,      // 默认每5分钟一档   档可以选 5、10、20、30 ；其他档不管用；当前参数选择，必须在 showTime 为true 的前提下
+        lang: 'zh_cn', // 默认为 "zh_cn"   当前语言
+        showTime: true, // 默认为 true      是否展示时间选择
+        accurate: 5, // 默认每5分钟一档   档可以选 5、10、20、30 ；其他档不管用；当前参数选择，必须在 showTime 为true 的前提下
         showBefore: true, // 默认为false      是否允许可以获取之前的时间
-        initTime: new Date()
-      }
-    }
-  }
+        initTime: new Date(),
+      };
+    },
+  },
 };
 </script>
 
