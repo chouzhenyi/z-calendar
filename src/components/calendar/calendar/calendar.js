@@ -3,7 +3,7 @@ class Calendar {
         let date = new Date()
         let dateObj = option.initTime
         if (dateObj instanceof Date) {
-            date = dateObj
+            date = dateObj;
         }
         this.year = date.getFullYear()
         this.month = date.getMonth() + 1
