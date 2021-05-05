@@ -5,12 +5,12 @@ class Calendar {
         if (dateObj instanceof Date) {
             date = dateObj;
         }
-        this.year = date.getFullYear()
-        this.month = date.getMonth() + 1
-        this.day = date.getDate()
-        this.hour = date.getHours()
-        this.minute = date.getMinutes()
-        this.thisMonth = false
+        this.year = date.getFullYear();
+        this.month = date.getMonth() + 1;
+        this.day = date.getDate();
+        this.hour = date.getHours();
+        this.minute = date.getMinutes();
+        this.thisMonth = false;
         this.Option = Object.assign(
             {
                 lang: 'zh_cn',    // 默认为 'zh_cn'   当前语言  
@@ -19,8 +19,8 @@ class Calendar {
                 showBefore: false // 默认为false      是否允许可以获取之前的时间
             },
             option || {}
-        )
-        this.lang = this.Option.lang || 'zh_cn'
+        );
+        this.lang = this.Option.lang || 'zh_cn';
         this.MonthList = [
             {
                 'zh_cn': '一月',
@@ -81,8 +81,8 @@ class Calendar {
                 'zh_cn': '十二月',
                 'enFull': 'December',
                 'enshort': 'Dec.'
-            }
-        ]
+            },
+        ];
     }
     // 判断闰年
     runNian(_year) {
@@ -125,6 +125,7 @@ class Calendar {
         }
         return arr
     }
+
     // 当月日历列表
     getCalendarList(_year, _month) {
         var monthDay = this.getMonthDay(_month, _year)
@@ -213,6 +214,7 @@ class Calendar {
         }
         return calendarArr
     }
+
     // 每7个为一组分割当月日期列表的数据
     getCalendar7List(_year, _month) {
         let list = this.getCalendarList(_year, _month)
@@ -235,6 +237,7 @@ class Calendar {
         }
         return temp
     }
+
     // 获取当前展示的年月
     getCurrentShowYearMonth() {
         let str = ''
@@ -245,10 +248,12 @@ class Calendar {
         console.log(str)
         return str
     }
+
     // 数字单个的个位数，补0 例如 '1' => '01'
     zeroPadding(num) {
         return /^\d{1}$/.test('' + num) ? ('0' + num) : ('' + num)
     }
+
     // 返回固定格式的时间
     getSerializedTime(year, month, day, hour, minute) {
         let timeStr = ''
@@ -259,6 +264,7 @@ class Calendar {
         }
         return timeStr += this.zeroPadding(hour) + ':' + this.zeroPadding(minute)
     }
+
     // 获取完整日历相关数据
     getCalendarData() {
         return {
@@ -266,6 +272,7 @@ class Calendar {
             calendar7List: this.getCalendar7List(this.year, this.month),
         }
     }
+
     // 前/后一个月的日历
     getPrevNextMonth(type) {
         if (type === 0) {
@@ -279,40 +286,42 @@ class Calendar {
             }
         } else {
             // 后一个月
-            let tempMonth = this.month + 1
+            let tempMonth = this.month + 1;
             if (tempMonth > 12) {
-                this.year += 1
-                this.month = 1
+                this.year += 1;
+                this.month = 1;
             } else {
-                this.month = tempMonth
+                this.month = tempMonth;
             }
         }
     }
+
     // 获取 0 - 23 时
     getHours() {
-        let list = []
-        let i = 0
+        let list = [];
+        let i = 0;
         while (i < 24) {
             list.push({
                 value: i,
                 type: 'hour'
-            })
-            i++
+            });
+            i++;
         }
-        return list
+        return list;
     }
+
     getMinutes() {
-        let step = this.Option.accurate
-        let list = []
-        let i = 0
+        const step = this.Option.accurate;
+        const list = [];
+        let i = 0;
         while (i < 60) {
             list.push({
                 value: i,
-                type: 'minute'
-            })
-            i += step
+                type: 'minute',
+            });
+            i += step;
         }
-        return list
+        return list;
     }
 }
-export default Calendar
+export default Calendar;

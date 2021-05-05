@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div>定制化的日历插件，在凡凡的时候保持skr，可以自定义button事件</div>
     <div class="calendar-timer">
         <div class="calendar">
             <div class="calendar-nav">
@@ -18,7 +19,8 @@
             </div>
             <div class="calendar-day-wrapper">
               <div class="day-item-wrapper" v-for="(item, index) in list" :key="index">
-                <div class="day-item" v-for="(itemColumn, itemIndex) in item" :key="itemIndex" @click="dayClick(itemColumn)"
+                <div class="day-item" v-for="(itemColumn, itemIndex) in item"
+                :key="itemIndex" @click="dayClick(itemColumn)"
                  :class="{
                    'cur': itemColumn.isToday,
                    'other-month': !itemColumn.currentMonth,
@@ -37,7 +39,10 @@
                         <span>&lt;</span>
                     </div>
                     <div class="inner-wrapper" ref="hourEl">
-                        <div class="frage" v-for="(item, index) in hours" @click="hourClick(index)" :class="{'active': item.value === selectTimeDate.hour}" :key="index">{{item.value}}</div>
+                        <div class="frage" v-for="(item, index) in hours"
+                        @click="hourClick(index)"
+                        :class="{'active': item.value === selectTimeDate.hour}"
+                        :key="index">{{item.value}}</div>
                     </div>
                     <div class="time-item-icon" @click="timeArrowScroll(1)">
                         <!-- <i class="iconfont iconicon1" /> -->
@@ -50,7 +55,10 @@
                         <span>&lt;</span>
                     </div>
                     <div class="inner-wrapper" ref="minuteEl">
-                      <div class="frage" v-for="(item, index) in minutes" @click="minuteClick(index)" :class="{'active': item.value === selectTimeDate.minute}"  :key="index">{{item.value}}</div>
+                      <div class="frage" v-for="(item, index) in minutes"
+                      @click="minuteClick(index)"
+                      :class="{'active': item.value === selectTimeDate.minute}"
+                      :key="index">{{item.value}}</div>
                     </div>
                     <div class="time-item-icon" @click="timeArrowScroll(3)">
                         <!-- <i class="iconfont iconicon1" /> -->
@@ -75,10 +83,10 @@ export default {
     return {
       // 日历需要配置的必要参数
       option: {
-        lang: 'en',    // 默认为 "zh_cn"   当前语言
-        showTime: true,   // 默认为 true      是否展示时间选择
-        accurate: 5,      // 默认每5分钟一档   档可以选 5、10、20、30 ；其他档不管用；当前参数选择，必须在 showTime 为true 的前提下
-        showBefore: false // 默认为false      是否允许可以获取之前的时间
+        lang: 'en', // 默认为 "zh_cn"   当前语言
+        showTime: true, // 默认为 true      是否展示时间选择
+        accurate: 5, // 默认每5分钟一档   档可以选 5、10、20、30 ；其他档不管用；当前参数选择，必须在showTime为true 的前提下
+        showBefore: false, // 默认为false      是否允许可以获取之前的时间
       },
       calendar: null, // 实例化日历类
       calendarNavTitle: '', // 顶部标题时间
@@ -95,13 +103,13 @@ export default {
     this.calendarInit();
     this.$nextTick(() => {
       this.hours.forEach((e, i) => {
-        if(this.calendar.hour === e.value) {
+        if (this.calendar.hour === e.value) {
           this.hourClick(i);
         }
       });
       this.minutes.forEach((e, i) => {
-        if(this.calendar.minute === e.value) {
-          this.minuteClick(i)
+        if (this.calendar.minute === e.value) {
+          this.minuteClick(i);
         }
       });
     });
@@ -125,15 +133,14 @@ export default {
     },
     // 点击某一天
     dayClick(item) {
-      const day = item.day;
-      const month = item.month;
-      const year = item.year;
+      const {
+        day, month, year, status,
+      } = item;
       // 首先判断是否允许选择早于今天的日期
       if (!this.option.showBefore && item.isEarlierThanToday) {
         return;
       }
       // 用status 判断是不是当月，不是的话前后切换日历
-      const status = item.status;
       if (status !== 1) {
         const type = status ? 1 : 0;
         this.monthChange(type, day);
@@ -155,8 +162,8 @@ export default {
         return;
       }
       this.calendar.getPrevNextMonth(type);
-        // 获取完整日历相关数据
-      let calendarData = this.calendar.getCalendarData();
+      // 获取完整日历相关数据
+      const calendarData = this.calendar.getCalendarData();
       // 获取当前日历列表
       this.list = calendarData.calendar7List;
       // 切换月份 day 重置为 1 防止出现类似 选中day 为31 但是切换目的月为30 之类的情况
@@ -169,16 +176,14 @@ export default {
       // 顶部标题
       this.calendarNavTitle = this.calendar.getCurrentShowYearMonth();
     },
-    // 选中的日期加active 
+    // 选中的日期加active
     selectActive() {
-      const calendar = this.calendar;
-      const year = calendar.year;
-      const month = calendar.month;
-      const day = calendar.day;
+      const { calendar } = this;
+      const { year, month, day } = calendar;
       if (year && month && day) {
-        this.list.forEach(l => {
-          l.forEach(e => {
-            if( e.day === day && e.month === month && e.year === year ) {
+        this.list.forEach((l) => {
+          l.forEach((e) => {
+            if (e.day === day && e.month === month && e.year === year) {
               e.active = true;
             } else {
               e.active = false;
@@ -192,7 +197,7 @@ export default {
       const ref = this.$refs;
       const hour = ref.hourEl;
       const minute = ref.minuteEl;
-      switch(type) {
+      switch (type) {
         case 0:
           hour.scrollTop += 170;
           break;
@@ -206,7 +211,7 @@ export default {
           minute.scrollTop -= 170;
           break;
         default:
-          console.log('default');
+          break;
       }
     },
     // 点击小时置顶
@@ -214,7 +219,7 @@ export default {
       const ref = this.$refs;
       const hour = ref.hourEl;
       const item = hour.childNodes[index];
-      if(item) {
+      if (item) {
         hour.scrollTop = item.offsetTop;
         this.calendar.hour = this.hours[index].value;
         this.getDateTimeResult();
@@ -225,7 +230,7 @@ export default {
       const ref = this.$refs;
       const minute = ref.minuteEl;
       const item = minute.childNodes[index];
-      if(item) {
+      if (item) {
         minute.scrollTop = item.offsetTop;
         this.calendar.minute = this.minutes[index].value;
         this.getDateTimeResult();
@@ -233,20 +238,26 @@ export default {
     },
     // 选中的时间 天 和 时分 分开选的
     getDateTimeResult() {
-      const calendar = this.calendar;
-      const year = calendar.year;
-      const month = calendar.month;
-      const day = calendar.day;
-      const hour = calendar.hour;
-      const minute = calendar.minute;
-      minute = (minute - minute%5 ) + Math.round(minute%5 / 5) * 5;
+      const { calendar } = this;
+      const {
+        year, month, day, hour,
+      } = calendar;
+      let { minute } = calendar;
+      minute = (minute - (minute % 5)) + Math.round((minute % 5) / 5) * 5;
       calendar.minute = minute;
-      const dateTimeStr = year + "年" + this.zeroPadding(month) + "月" + this.zeroPadding(day) + "日 " + this.zeroPadding(hour) + ":" + this.zeroPadding(minute);
-      if(this.option.lang !== "zh_cn") {
+      let dateTimeStr = `${year}年${this.zeroPadding(month)}月${this.zeroPadding(day)}日${this.zeroPadding(hour)}：${this.zeroPadding(minute)}`;
+      if (this.option.lang !== 'zh_cn') {
         const yearMonth = calendar.getCurrentShowYearMonth();
-        dateTimeStr = yearMonth + " "+ day + " " + this.zeroPadding(hour) + ":" + this.zeroPadding(minute);
+        dateTimeStr = `${yearMonth} ${day} ${this.zeroPadding(hour)}：${this.zeroPadding(minute)}`;
       }
-      this.selectTimeDate = { year, month, day, hour, minute, dateTimeStr };
+      this.selectTimeDate = {
+        year,
+        month,
+        day,
+        hour,
+        minute,
+        dateTimeStr,
+      };
       this.$emit('change', this.selectTimeDate);
     },
     // 数字单个的个位数，补0 例如 '1' => '01'
@@ -254,7 +265,7 @@ export default {
       return /^\d{1}$/.test(`${num}`) ? (`0${num}`) : (`${num}`);
     },
   },
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
