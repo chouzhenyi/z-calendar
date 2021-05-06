@@ -1,19 +1,19 @@
-class zPromise{
+class ZPromise {
   constructor(fn) {
     this.resolveCallbacks = [];
     this.rejectCallbacks = [];
     this.state = 'PENDING';
     this.value = '';
-    fn && fn(this.resolve.bind(this), this.reject.bind(this));
+    fn(this.resolve.bind(this), this.reject.bind(this));
   }
 
   resolve(value) {
-    if(this.state === 'PENDING') {
+    if (this.state === 'PENDING') {
       this.state = 'FULFILLED';
       this.value = value;
-      this.resolveCallbacks.map(cb => {
+      this.resolveCallbacks.forEach((cb) => {
         cb(value);
-      })
+      });
     }
   }
 
@@ -21,18 +21,18 @@ class zPromise{
     if (this.state === 'PENDING') {
       this.state = 'REJECTED';
       this.value = value;
-      this.rejectCallbacks.map(cb => {
+      this.rejectCallbacks.forEach((cb) => {
         cb(value);
-      })
+      });
     }
   }
 
   then(onFulfilled, onRejected) {
-    if(this.state === 'PENDING') {
+    if (this.state === 'PENDING') {
       this.resolveCallbacks.push(onFulfilled);
       this.rejectCallbacks.push(onRejected);
     }
-    if(this.state === 'FULFILLED') {
+    if (this.state === 'FULFILLED') {
       onFulfilled(this.value);
     }
     if (this.state === 'REJECTED') {
@@ -42,13 +42,18 @@ class zPromise{
 }
 
 function promiseHandle() {
-  return new zPromise((resolve, reject) => {
+  return new ZPromise((resolve, reject) => {
     setTimeout(() => {
-      resolve(2333);
+      if (Math.random() <= 0.2) {
+        reject('yoyo');
+      } else {
+        resolve(2333);
+      }
     }, 3e3);
-  })
+  });
 }
 
 export {
-  promiseHandle
-}
+  ZPromise,
+  promiseHandle,
+};
