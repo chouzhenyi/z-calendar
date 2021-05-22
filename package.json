@@ -6,7 +6,7 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "test/index_test.js"
+    "test": "npm run build && npm run dev"
   },
   "dependencies": {
     "vue": "^2.6.12",
